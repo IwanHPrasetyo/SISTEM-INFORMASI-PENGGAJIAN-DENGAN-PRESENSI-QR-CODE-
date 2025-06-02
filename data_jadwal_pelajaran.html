@@ -270,7 +270,7 @@
 							<span class="user-icon">
 								<img src="vendors/images/photo1.jpg" alt="" />
 							</span>
-							<span class="user-name">Ross C. Lopez</span>
+							<span class="user-name">M. Sulaiman</span>
 						</a>
 						<div
 							class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
@@ -574,7 +574,7 @@
 						<div class="row">
 							<div class="col-md-6 col-sm-12">
 								<div class="title">
-									<h4>DataTable</h4>
+									<h4>Data Jadwal Pelajaran</h4>
 								</div>
 								<nav aria-label="breadcrumb" role="navigation">
 									<ol class="breadcrumb">
@@ -582,27 +582,20 @@
 											<a href="index.html">Home</a>
 										</li>
 										<li class="breadcrumb-item active" aria-current="page">
-											DataTable
+											Data Jadwal Pelajaran
 										</li>
 									</ol>
 								</nav>
 							</div>
 							<div class="col-md-6 col-sm-12 text-right">
-								<div class="dropdown">
 									<a
-										class="btn btn-primary dropdown-toggle"
+										class="btn btn-primary"
 										href="#"
 										role="button"
 										data-toggle="dropdown"
 									>
-										January 2018
+										Tambah Jadwal Pelajaran
 									</a>
-									<div class="dropdown-menu dropdown-menu-right">
-										<a class="dropdown-item" href="#">Export List</a>
-										<a class="dropdown-item" href="#">Policies</a>
-										<a class="dropdown-item" href="#">View Assets</a>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -620,11 +613,11 @@
 									<tr>
 										<th class="table-plus datatable-nosort">ID Mapel</th>
 										<th>Nama Mapel</th>
-										<th>Kelas</th>
 										<th>Nama Guru</th>
 										<th>Hari</th>
 										<th>Jam</th>
 										<th>Kelas</th>
+										<th>QR Code</th>
 										<th class="datatable-nosort">Action</th>
 									</tr>
 								</thead>
@@ -632,11 +625,18 @@
 									<tr>
 										<td class="table-plus">MP001</td>
 										<td>Bahasa Arab</td>
-										<td>VII</td>
 										<td>Moh. Sulaiman S.Pd</td>
 										<td>Senin</td>
 										<td>07.00 - 07.30</td>
 										<td>8</td>
+										<td>
+											<button type="button"
+											data-toggle="modal"
+											data-target="#Medium-modal"
+											class="btn" data-bgcolor="#1da1f2" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(29, 161, 242);">
+												<i class="bi bi-qr-code"></i>
+											</button>
+										</td>
 										<td>
 											<div class="dropdown">
 												<a
@@ -666,11 +666,18 @@
 									<tr>
 										<td class="table-plus">MP002</td>
 										<td>Bahasa Indonesia</td>
-										<td>VII</td>
 										<td>Rosinta Puspitasari S.Pd</td>
 										<td>Senin</td>
 										<td>07.00 - 07.30</td>
 										<td>9a</td>
+										<td>
+											<button type="button"
+													data-toggle="modal"
+													data-target="#Medium-modal"
+													class="btn" data-bgcolor="#1da1f2" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(29, 161, 242);">
+												<i class="bi bi-qr-code"></i>
+											</button>
+										</td>
 										<td>
 											<div class="dropdown">
 												<a
@@ -699,6 +706,44 @@
 									</tr>
 							</table>
 						</div>
+							<div class="pd-20 card-box height-100-p">
+								<div
+									class="modal fade"
+									id="Medium-modal"
+									tabindex="-1"
+									role="dialog"
+									aria-labelledby="myLargeModalLabel"
+									aria-hidden="true"
+								>
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title" id="myLargeModalLabel">
+													Scan Absensi
+												</h4>
+												<button
+													type="button"
+													class="close"
+													data-dismiss="modal"
+													aria-hidden="true"
+												>
+													×
+												</button>
+											</div>
+											<div class="modal-body" align="center">
+												<img
+													src="src/images/QR_code.svg"
+													alt=""
+													class="light-logo"
+												/>
+												<p>Silahkan scan QRCode untuk melakukan absensi</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						
+
+
 					</div>
 					<!-- Simple Datatable End -->
 				</div>

@@ -270,7 +270,7 @@
 							<span class="user-icon">
 								<img src="vendors/images/photo1.jpg" alt="" />
 							</span>
-							<span class="user-name">Ross C. Lopez</span>
+							<span class="user-name">M. Sulaiman</span>
 						</a>
 						<div
 							class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
@@ -493,34 +493,34 @@
 						
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
-								<span class="micon bi bi-table"></span
-								><span class="mtext"> Data Mata Pelajaran</span>
+								<span class="micon bi bi-mortarboard"></span>
+								<span class="mtext"> Data Mata Pelajaran</span>
 							</a>
 							<ul class="submenu">
 								
-								<li><a href="datatable.html">Data Pelajaran</a></li>
-								<li><a href="datatable.html">Data Jadwal Pelajaran</a></li>
+								<li><a href="data_pelajaran.html">Data Pelajaran</a></li>
+								<li><a href="data_jadwal_pelajaran.html">Data Jadwal Pelajaran</a></li>
 							</ul>
 						</li>
 							<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
-								<span class="micon bi bi-table"></span
-								><span class="mtext"> Data Kelas</span>
+								<span class="micon bi bi-shop"></span>
+								<span class="mtext"> Data Kelas</span>
 							</a>
 							<ul class="submenu">
-								<li><a href="datatable.html">Data Kelas</a></li>
-								<li><a href="datatable.html">Data Tahun Akademik</a></li>
+								<li><a href="data_kelas.html">Data Kelas</a></li>
+								<li><a href="data_th_akademik.html">Data Tahun Akademik</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
-								<span class="micon bi bi-table"></span
-								><span class="mtext"> Data Guru</span>
+								<span class="micon bi bi-person-workspace"></span>
+								<span class="mtext"> Data Guru</span>
 							</a>
 							<ul class="submenu">
 								
-								<li><a href="datatable.html">Data Guru</a></li>
-								<li><a href="datatable.html">Data Kehadiran</a></li>
+								<li><a href="data_guru.html">Data Guru</a></li>
+								<li><a href="data_kehadiran.html">Data Kehadiran</a></li>
 							</ul>
 						<li>
 							<div class="dropdown-divider"></div>
@@ -542,8 +542,7 @@
 						</li>
 						<li>
 							<a
-								href="https://dropways.github.io/deskapp-free-single-page-website-template/"
-								target="_blank"
+								href="laporan_absensi.html"
 								class="dropdown-toggle no-arrow"
 							>
 								<span class="micon bi bi-calendar-check-fill"></span>
@@ -554,8 +553,7 @@
 						</li>
 						<li>
 							<a
-								href="https://dropways.github.io/deskapp-free-single-page-website-template/"
-								target="_blank"
+								href="laporan_gaji.html"
 								class="dropdown-toggle no-arrow"
 							>
 								<span class="micon bi bi-hdd-stack"></span>
@@ -577,7 +575,7 @@
 						<div class="row">
 							<div class="col-md-6 col-sm-12">
 								<div class="title">
-									<h4>DataTable</h4>
+									<h4>Data Guru</h4>
 								</div>
 								<nav aria-label="breadcrumb" role="navigation">
 									<ol class="breadcrumb">
@@ -585,67 +583,50 @@
 											<a href="index.html">Home</a>
 										</li>
 										<li class="breadcrumb-item active" aria-current="page">
-											DataTable
+											Data Guru
 										</li>
 									</ol>
 								</nav>
 							</div>
 							<div class="col-md-6 col-sm-12 text-right">
-								<div class="dropdown">
 									<a
-										class="btn btn-primary dropdown-toggle"
+										class="btn btn-primary"
 										href="#"
 										role="button"
 										data-toggle="dropdown"
 									>
-										January 2018
+										Tambah Data Guru
 									</a>
-									<div class="dropdown-menu dropdown-menu-right">
-										<a class="dropdown-item" href="#">Export List</a>
-										<a class="dropdown-item" href="#">Policies</a>
-										<a class="dropdown-item" href="#">View Assets</a>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
 					<!-- Simple Datatable start -->
 					<div class="card-box mb-30">
 						<div class="pd-20">
-							<h4 class="text-blue h4">Data Mata Pelajaran</h4>
+							<h4 class="text-blue h4">Data Guru</h4>
 							<p class="mb-0">
-								you can find more options
-								<a
-									class="text-primary"
-									href="https://datatables.net/"
-									target="_blank"
-									>Click Here</a
-								>
+								Mastering Data Guru
 							</p>
 						</div>
 						<div class="pb-20">
 							<table class="data-table table stripe hover nowrap">
 								<thead>
 									<tr>
-										<th class="table-plus datatable-nosort">ID Mapel</th>
-										<th>Nama Mapel</th>
-										<th>Kelas</th>
-										<th>Nama Guru</th>
-										<th>Hari</th>
-										<th>Jam</th>
-										<th>Kelas</th>
+										<th class="table-plus datatable-nosort">NIK</th>
+										<th>Nama</th>
+										<th>Jabatan</th>
+										<th>Status</th>
 										<th class="datatable-nosort">Action</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td class="table-plus">MP001</td>
-										<td>Bahasa Arab</td>
-										<td>VII</td>
 										<td>Moh. Sulaiman S.Pd</td>
-										<td>Senin</td>
-										<td>07.00 - 07.30</td>
-										<td>8</td>
+										<td>Guru</td>
+										<td>
+											<span class="badge badge-primary" data-bgcolor="#16a085">Satminkal</span>
+										</td>
 										<td>
 											<div class="dropdown">
 												<a
@@ -674,12 +655,11 @@
 									</tr>
 									<tr>
 										<td class="table-plus">MP002</td>
-										<td>Bahasa Indonesia</td>
-										<td>VII</td>
-										<td>Rosinta Puspitasari S.Pd</td>
-										<td>Senin</td>
-										<td>07.00 - 07.30</td>
-										<td>9a</td>
+										<td>Moh. Sulaiman S.Pd</td>
+										<td>Guru</td>
+										<td>
+											<span class="badge badge-primary" data-bgcolor="#3498db">Non Satminkal</span>
+										</td>
 										<td>
 											<div class="dropdown">
 												<a
