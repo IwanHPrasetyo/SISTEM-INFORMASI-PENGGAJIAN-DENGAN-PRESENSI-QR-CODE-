@@ -1,3 +1,10 @@
+<?php 
+	include_once('koneksi.php');
+
+	$result = $db->query("SELECT tj.id_jadwal, tpl.nama_pelajaran, tg.nama, tj.hari_waktu, tk.nama_kelas, tp.keterangan, tj.QRCode FROM tb_jadwal AS tj JOIN tb_penempatan AS tp ON tj.id_penempatan = tp.id_penempatan JOIN tb_pelajaran AS tpl ON tp.id_pelajaran = tpl.id_pelajaran JOIN tb_guru AS tg ON tp.id_guru = tg.id_guru JOIN tb_kelas AS tk ON tp.id_kelas = tk.id_kelas");
+
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -614,96 +621,62 @@
 										<th class="table-plus datatable-nosort">ID Mapel</th>
 										<th>Nama Mapel</th>
 										<th>Nama Guru</th>
-										<th>Hari</th>
-										<th>Jam</th>
+										<th>Hari/Jam Mengajar</th>
 										<th>Kelas</th>
+										<th>Keterangan</th>
 										<th>QR Code</th>
 										<th class="datatable-nosort">Action</th>
 									</tr>
 								</thead>
 								<tbody>
+
+								<?php 
+								while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+									echo "
 									<tr>
-										<td class="table-plus">MP001</td>
-										<td>Bahasa Arab</td>
-										<td>Moh. Sulaiman S.Pd</td>
-										<td>Senin</td>
-										<td>07.00 - 07.30</td>
-										<td>8</td>
+										<td class='table-plus'>JP".$row['id_jadwal']."</td>
+										<td>".$row['nama_pelajaran']."</td>
+										<td>".$row['nama']."</td>
+										<td>".$row['hari_waktu']."</td>
+										<td>".$row['nama_kelas']."</td>
+										<td>".$row['keterangan']."</td>
 										<td>
-											<button type="button"
-											data-toggle="modal"
-											data-target="#Medium-modal"
-											class="btn" data-bgcolor="#1da1f2" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(29, 161, 242);">
-												<i class="bi bi-qr-code"></i>
+											<button type='button'
+											data-toggle='modal'
+											data-target='#Medium-modal'
+											class='btn' data-bgcolor='#1da1f2' data-color='#ffffff' style='color: rgb(255, 255, 255); background-color: rgb(29, 161, 242);'>
+												<i class='bi bi-qr-code'></i>
 											</button>
 										</td>
 										<td>
-											<div class="dropdown">
+											<div class='dropdown'>
 												<a
-													class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-													href="#"
-													role="button"
-													data-toggle="dropdown"
+													class='btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle'
+													href='#'
+													role='button'
+													data-toggle='dropdown'
 												>
-													<i class="dw dw-more"></i>
+													<i class='dw dw-more'></i>
 												</a>
 												<div
-													class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
+													class='dropdown-menu dropdown-menu-right dropdown-menu-icon-list'
 												>
-													<a class="dropdown-item" href="#"
-														><i class="dw dw-eye"></i> View</a
+													<a class='dropdown-item' href='#'
+														><i class='dw dw-eye'></i> View</a
 													>
-													<a class="dropdown-item" href="#"
-														><i class="dw dw-edit2"></i> Edit</a
+													<a class='dropdown-item' href='#'
+														><i class='dw dw-edit2'></i> Edit</a
 													>
-													<a class="dropdown-item" href="#"
-														><i class="dw dw-delete-3"></i> Delete</a
+													<a class='dropdown-item' href='#'
+														><i class='dw dw-delete-3'></i> Delete</a
 													>
 												</div>
 											</div>
 										</td>
-									</tr>
-									<tr>
-										<td class="table-plus">MP002</td>
-										<td>Bahasa Indonesia</td>
-										<td>Rosinta Puspitasari S.Pd</td>
-										<td>Senin</td>
-										<td>07.00 - 07.30</td>
-										<td>9a</td>
-										<td>
-											<button type="button"
-													data-toggle="modal"
-													data-target="#Medium-modal"
-													class="btn" data-bgcolor="#1da1f2" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(29, 161, 242);">
-												<i class="bi bi-qr-code"></i>
-											</button>
-										</td>
-										<td>
-											<div class="dropdown">
-												<a
-													class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-													href="#"
-													role="button"
-													data-toggle="dropdown"
-												>
-													<i class="dw dw-more"></i>
-												</a>
-												<div
-													class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
-												>
-													<a class="dropdown-item" href="#"
-														><i class="dw dw-eye"></i> View</a
-													>
-													<a class="dropdown-item" href="#"
-														><i class="dw dw-edit2"></i> Edit</a
-													>
-													<a class="dropdown-item" href="#"
-														><i class="dw dw-delete-3"></i> Delete</a
-													>
-												</div>
-											</div>
-										</td>
-									</tr>
+									</tr>";
+									}
+								?>
+
 							</table>
 						</div>
 							<div class="pd-20 card-box height-100-p">

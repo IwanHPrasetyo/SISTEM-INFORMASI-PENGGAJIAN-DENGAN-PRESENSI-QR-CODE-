@@ -32,8 +32,8 @@ if(isset($_POST['login'])){
         }
 		else {
 			$_SESSION['login_error'] = true;
-    		header("Location: index.php");
-			 echo "<script>document.getElementById('sa-error').click();</script>";
+			echo "<script>document.getElementsByName('gagal_login')[0].click();</script>";
+			  header("Location: index.php");
 			exit;
 		}
     }
@@ -205,7 +205,8 @@ if(isset($_POST['login'])){
 									<button
 										type="button"
 										id="sa-error"
-										style="display:none;"
+										name="gagal_login"
+										style="display: none;"
 									>
 									</button>
 									<div class="col-6">

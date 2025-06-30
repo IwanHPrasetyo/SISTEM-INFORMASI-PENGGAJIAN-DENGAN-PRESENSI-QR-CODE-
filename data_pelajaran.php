@@ -2,6 +2,41 @@
 	include_once("koneksi.php");
 
 	$result = $db->query("SELECT * FROM tb_pelajaran");
+
+
+	// Proses Simpan Data
+	if(isset($_POST['simpan'])){
+		$name = filter_input(INPUT_POST, 'nama_pelajaran', FILTER_SANITIZE_STRING); 
+		if(empty($name)){
+			 header("Location: dashboard.php");
+		}
+		else{
+			$sql = "INSERT INTO tb_pelajaran (nama_pelajaran) VALUES (:name)";
+
+			$query = $db->prepare($sql);
+
+			$query->bindparam(':name', $name);
+
+			$query->execute();
+
+			 header("Location: data_pelajaran.php");
+
+		}
+	}
+
+	// Proses Hapus Data
+	if (isset($_GET['id'])) {
+		$id = $_GET['id'];
+		$sql = 'DELETE FROM tb_pelajaran where id_pelajaran=:id';
+
+		$query = $db->prepare($sql);
+		$query->execute(array(':id' => $id));
+
+		header("Location:data_pelajaran.php");
+		exit;
+	}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -599,7 +634,7 @@
 										class="btn btn-primary"
 										href="#"
 										data-toggle="modal"
-										data-target="#bd-example-modal-lg"
+										data-target="#form_input"
 										role="button"
 										data-toggle="dropdown"
 									>
@@ -610,7 +645,7 @@
 							<div class="pd-20 card-box height-100-p">
 								<div
 									class="modal fade bs-example-modal-lg"
-									id="bd-example-modal-lg"
+									id="form_input"
 									tabindex="-1"
 									role="dialog"
 									aria-labelledby="myLargeModalLabel"
@@ -632,28 +667,17 @@
 												</button>
 											</div>
 											<div class="modal-body">
-												<p>
-													Lorem ipsum dolor sit amet, consectetur adipisicing
-													elit, sed do eiusmod tempor incididunt ut labore et
-													dolore magna aliqua. Ut enim ad minim veniam, quis
-													nostrud exercitation ullamco laboris nisi ut aliquip
-													ex ea commodo consequat. Duis aute irure dolor in
-													reprehenderit in voluptate velit esse cillum dolore eu
-													fugiat nulla pariatur. Excepteur sint occaecat
-													cupidatat non proident, sunt in culpa qui officia
-													deserunt mollit anim id est laborum.
-												</p>
-												<p>
-													Lorem ipsum dolor sit amet, consectetur adipisicing
-													elit, sed do eiusmod tempor incididunt ut labore et
-													dolore magna aliqua. Ut enim ad minim veniam, quis
-													nostrud exercitation ullamco laboris nisi ut aliquip
-													ex ea commodo consequat. Duis aute irure dolor in
-													reprehenderit in voluptate velit esse cillum dolore eu
-													fugiat nulla pariatur. Excepteur sint occaecat
-													cupidatat non proident, sunt in culpa qui officia
-													deserunt mollit anim id est laborum.
-												</p>
+												<form action="#" method="POST">
+													<div class="form-group">
+														<label>Nama Pelajaran</label>
+														<input
+															class="form-control"
+															type="text"
+															placeholder="Nama Pelajaran"
+															name="nama_pelajaran"
+														/>
+													</div>
+												
 											</div>
 											<div class="modal-footer">
 												<button
@@ -663,10 +687,80 @@
 												>
 													Close
 												</button>
-												<button type="button" class="btn btn-primary">
+												<button name="simpan" type="submit" class="btn btn-primary">
 													Save changes
 												</button>
 											</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Modal Edit Mata Pelajaran -->
+							<div class="pd-20 card-box height-100-p">
+								<div
+									class="modal fade bs-example-modal-lg"
+									id="form_edit"
+									tabindex="-1"
+									role="dialog"
+									aria-labelledby="myLargeModalLabel"
+									aria-hidden="true"
+								>
+									<div class="modal-dialog modal-lg modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title" id="myLargeModalLabel">
+													Form Edit Mata Pelajaran
+												</h4>
+												<button
+													type="button"
+													class="close"
+													data-dismiss="modal"
+													aria-hidden="true"
+												>
+													×
+												</button>
+											</div>
+											<div class="modal-body">
+												<form action="#" method="POST">
+													
+													<div class="form-group">
+														<label>ID Pelajaran</label>
+														<input
+															class="form-control"
+															type="hidden"
+															placeholder="ID Pelajaran"
+															name="edit_id_pelajaran"
+															id="modal-id"
+														/>
+													</div>
+
+													<div class="form-group">
+														<label>Nama Pelajaran</label>
+														<input
+															class="form-control"
+															type="text"
+															placeholder="Nama Pelajaran"
+															name="edit_nama_pelajaran"
+															id="modal-nama"
+														/>
+													</div>
+												
+											</div>
+											<div class="modal-footer">
+												<button
+													type="button"
+													class="btn btn-secondary"
+													data-dismiss="modal"
+												>
+													Close
+												</button>
+												<button name="simpan" type="submit" class="btn btn-primary">
+													Save changes
+												</button>
+											</div>
+											</form>
 										</div>
 									</div>
 								</div>
@@ -717,10 +811,12 @@
 													<a class='dropdown-item' href='#'
 														><i class='dw dw-eye'></i> View</a
 													>
-													<a class='dropdown-item' href='#'
+													<a   data-id='{$row['id_pelajaran']}'
+                   										 data-nama='{$row['nama_pelajaran']}' 
+														class='dropdown-item'data-toggle='modal' data-target='#form_edit'
 														><i class='dw dw-edit2'></i> Edit</a
 													>
-													<a class='dropdown-item' href='#'
+													<a class='dropdown-item' href='data_pelajaran.php?id=".$row['id_pelajaran']."'
 														><i class='dw dw-delete-3'></i> Delete</a
 													>
 												</div>
@@ -741,6 +837,20 @@
 		</div>
 		
 		<!-- js -->
+
+		<script>
+		// Isi modal saat akan ditampilkan
+		 $(document).on('click', '.btn-edit', function () {
+			var id = $(this).data('id');
+			var nama = $(this).data('nama');
+			
+			$('#modal-id').val(id);
+			$('#modal-nama').val(nama);
+		});
+		
+		</script>
+
+
 		<script src="vendors/scripts/core.js"></script>
 		<script src="vendors/scripts/script.min.js"></script>
 		<script src="vendors/scripts/process.js"></script>
