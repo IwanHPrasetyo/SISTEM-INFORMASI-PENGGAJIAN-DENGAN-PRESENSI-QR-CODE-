@@ -1,3 +1,46 @@
+<?php 
+
+require_once("koneksi.php");
+
+if(isset($_POST['login'])){
+
+    $nip = filter_input(INPUT_POST, 'nip', FILTER_SANITIZE_STRING);
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+
+    $sql = "SELECT * FROM tb_guru AS tg WHERE tg.nip =:nip";
+    $stmt = $db->prepare($sql);
+    
+    // bind parameter ke query
+    $params = array(
+        ":nip" => $nip
+    );
+
+    $stmt->execute($params);
+
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // jika user terdaftar
+    if($user){
+		if ($user["password"] == $password) {
+            // buat Session
+            session_start();
+            $_SESSION["user"] = $user;
+			print_r($user);
+            // login sukses, alihkan ke halaman timeline
+            header("Location: dashboard.php");
+    exit;
+        }
+		else {
+			$_SESSION['login_error'] = true;
+    		header("Location: index.php");
+			 echo "<script>document.getElementById('sa-error').click();</script>";
+			exit;
+		}
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -84,14 +127,9 @@
 				class="container-fluid d-flex justify-content-between align-items-center"
 			>
 				<div class="brand-logo">
-					<a href="login.html">
+					<a href="index.php">
 						<img src="src/images/logo_sekolah_small.png" alt="" />
 					</a>
-				</div>
-				<div class="login-menu">
-					<ul>
-						<li><a href="register.html">Register</a></li>
-					</ul>
 				</div>
 			</div>
 		</div>
@@ -106,23 +144,11 @@
 					<div class="col-md-6 col-lg-5">
 						<div class="login-box bg-white box-shadow border-radius-10">
 							<div class="login-title">
-								<h2 class="text-center text-primary">Login To DeskApp</h2>
+								<h2 class="text-center text-primary">Sistem Absensi Guru</h2>
 							</div>
-							<form>
+							<form action="" method="POST">
 								<div class="select-role">
 									<div class="btn-group btn-group-toggle" data-toggle="buttons">
-										<label class="btn active">
-											<input type="radio" name="options" id="admin" />
-											<div class="icon">
-												<img
-													src="vendors/images/briefcase.svg"
-													class="svg"
-													alt=""
-												/>
-											</div>
-											<span>I'm</span>
-											Manager
-										</label>
 										<label class="btn">
 											<input type="radio" name="options" id="user" />
 											<div class="icon">
@@ -132,8 +158,8 @@
 													alt=""
 												/>
 											</div>
-											<span>I'm</span>
-											Employee
+											<span>Login</span>
+											Guru
 										</label>
 									</div>
 								</div>
@@ -141,7 +167,8 @@
 									<input
 										type="text"
 										class="form-control form-control-lg"
-										placeholder="Username"
+										name='nip'
+										placeholder="NIP"
 									/>
 									<div class="input-group-append custom">
 										<span class="input-group-text"
@@ -153,6 +180,7 @@
 									<input
 										type="password"
 										class="form-control form-control-lg"
+										name='password'
 										placeholder="**********"
 									/>
 									<div class="input-group-append custom">
@@ -174,6 +202,12 @@
 											>
 										</div>
 									</div>
+									<button
+										type="button"
+										id="sa-error"
+										style="display:none;"
+									>
+									</button>
 									<div class="col-6">
 										<div class="forgot-password">
 											<a href="forgot-password.html">Forgot Password</a>
@@ -183,28 +217,7 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="input-group mb-0">
-											<!--
-											use code for form submit
-											<input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
-										-->
-											<a
-												class="btn btn-primary btn-lg btn-block"
-												href="index.html"
-												>Sign In</a
-											>
-										</div>
-										<div
-											class="font-16 weight-600 pt-10 pb-10 text-center"
-											data-color="#707373"
-										>
-											OR
-										</div>
-										<div class="input-group mb-0">
-											<a
-												class="btn btn-outline-primary btn-lg btn-block"
-												href="register.html"
-												>Register To Create Account</a
-											>
+											<input class="btn btn-primary btn-lg btn-block" name="login" type="submit" value="Sign In">
 										</div>
 									</div>
 								</div>
@@ -220,6 +233,11 @@
 		<script src="vendors/scripts/script.min.js"></script>
 		<script src="vendors/scripts/process.js"></script>
 		<script src="vendors/scripts/layout-settings.js"></script>
+
+		<!-- add sweet alert js & css in footer -->
+		<script src="src/plugins/sweetalert2/sweetalert2.all.js"></script>
+		<script src="src/plugins/sweetalert2/sweet-alert.init.js"></script>
+
 		<!-- Google Tag Manager (noscript) -->
 		<noscript
 			><iframe
