@@ -508,8 +508,8 @@
 								<span class="mtext"> Data Kelas</span>
 							</a>
 							<ul class="submenu">
-								<li><a href="data_kelas.html">Data Kelas</a></li>
-								<li><a href="data_th_akademik.html">Data Tahun Akademik</a></li>
+								<li><a href="data_kelas.php">Data Kelas</a></li>
+								<li><a href="data_th_akademik.php">Data Tahun Akademik</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -519,8 +519,8 @@
 							</a>
 							<ul class="submenu">
 								
-								<li><a href="data_guru.html">Data Guru</a></li>
-								<li><a href="data_kehadiran.html">Data Kehadiran</a></li>
+								<li><a href="data_guru.php">Data Guru</a></li>
+								<li><a href="data_kehadiran.php">Data Kehadiran</a></li>
 							</ul>
 						<li>
 							<div class="dropdown-divider"></div>

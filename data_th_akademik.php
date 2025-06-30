@@ -497,7 +497,6 @@
 								<span class="mtext"> Data Mata Pelajaran</span>
 							</a>
 							<ul class="submenu">
-								
 								<li><a href="data_pelajaran.php">Data Pelajaran</a></li>
 								<li><a href="data_jadwal_pelajaran.php">Data Jadwal Pelajaran</a></li>
 							</ul>
@@ -508,8 +507,8 @@
 								<span class="mtext"> Data Kelas</span>
 							</a>
 							<ul class="submenu">
-								<li><a href="data_kelas.html">Data Kelas</a></li>
-								<li><a href="data_th_akademik.html">Data Tahun Akademik</a></li>
+								<li><a href="data_kelas.php">Data Kelas</a></li>
+								<li><a href="data_th_akademik.php">Data Tahun Akademik</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -519,8 +518,8 @@
 							</a>
 							<ul class="submenu">
 								
-								<li><a href="data_guru.html">Data Guru</a></li>
-								<li><a href="data_kehadiran.html">Data Kehadiran</a></li>
+								<li><a href="data_guru.php">Data Guru</a></li>
+								<li><a href="data_kehadiran.php">Data Kehadiran</a></li>
 							</ul>
 						<li>
 							<div class="dropdown-divider"></div>
@@ -575,7 +574,7 @@
 						<div class="row">
 							<div class="col-md-6 col-sm-12">
 								<div class="title">
-									<h4>Data Guru</h4>
+									<h4>DataTable</h4>
 								</div>
 								<nav aria-label="breadcrumb" role="navigation">
 									<ol class="breadcrumb">
@@ -583,7 +582,7 @@
 											<a href="index.html">Home</a>
 										</li>
 										<li class="breadcrumb-item active" aria-current="page">
-											Data Guru
+											Data Tahun Akademik
 										</li>
 									</ol>
 								</nav>
@@ -595,7 +594,7 @@
 										role="button"
 										data-toggle="dropdown"
 									>
-										Tambah Data Guru
+										Tambah Tahun Akademik
 									</a>
 							</div>
 						</div>
@@ -603,30 +602,24 @@
 					<!-- Simple Datatable start -->
 					<div class="card-box mb-30">
 						<div class="pd-20">
-							<h4 class="text-blue h4">Data Guru</h4>
+							<h4 class="text-blue h4">Data Tahun Akademik</h4>
 							<p class="mb-0">
-								Mastering Data Guru
+								Mastering Tahun Akademik
 							</p>
 						</div>
 						<div class="pb-20">
 							<table class="data-table table stripe hover nowrap">
 								<thead>
 									<tr>
-										<th class="table-plus datatable-nosort">NIK</th>
-										<th>Nama</th>
-										<th>Jabatan</th>
-										<th>Status</th>
+										<th class="table-plus datatable-nosort">ID Mapel</th>
+										<th>Tahun Akademik</th>
 										<th class="datatable-nosort">Action</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td class="table-plus">MP001</td>
-										<td>Moh. Sulaiman S.Pd</td>
-										<td>Guru</td>
-										<td>
-											<span class="badge badge-primary" data-bgcolor="#16a085">Satminkal</span>
-										</td>
+										<td class="table-plus">TH001</td>
+										<td>2002</td>
 										<td>
 											<div class="dropdown">
 												<a
@@ -654,12 +647,8 @@
 										</td>
 									</tr>
 									<tr>
-										<td class="table-plus">MP002</td>
-										<td>Moh. Sulaiman S.Pd</td>
-										<td>Guru</td>
-										<td>
-											<span class="badge badge-primary" data-bgcolor="#3498db">Non Satminkal</span>
-										</td>
+										<td class="table-plus">TH002</td>
+										<td>2003</td>
 										<td>
 											<div class="dropdown">
 												<a
