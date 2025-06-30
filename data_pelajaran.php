@@ -1,3 +1,9 @@
+<?php
+	include_once("koneksi.php");
+
+	$result = $db->query("SELECT * FROM tb_pelajaran");
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -592,12 +598,81 @@
 									<a
 										class="btn btn-primary"
 										href="#"
+										data-toggle="modal"
+										data-target="#bd-example-modal-lg"
 										role="button"
 										data-toggle="dropdown"
 									>
 										Tambah Pelajaran
 									</a>
 							</div>
+							<!-- Modal Input Mata Pelajaran -->
+							<div class="pd-20 card-box height-100-p">
+								<div
+									class="modal fade bs-example-modal-lg"
+									id="bd-example-modal-lg"
+									tabindex="-1"
+									role="dialog"
+									aria-labelledby="myLargeModalLabel"
+									aria-hidden="true"
+								>
+									<div class="modal-dialog modal-lg modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title" id="myLargeModalLabel">
+													Form Input Mata Pelajaran
+												</h4>
+												<button
+													type="button"
+													class="close"
+													data-dismiss="modal"
+													aria-hidden="true"
+												>
+													×
+												</button>
+											</div>
+											<div class="modal-body">
+												<p>
+													Lorem ipsum dolor sit amet, consectetur adipisicing
+													elit, sed do eiusmod tempor incididunt ut labore et
+													dolore magna aliqua. Ut enim ad minim veniam, quis
+													nostrud exercitation ullamco laboris nisi ut aliquip
+													ex ea commodo consequat. Duis aute irure dolor in
+													reprehenderit in voluptate velit esse cillum dolore eu
+													fugiat nulla pariatur. Excepteur sint occaecat
+													cupidatat non proident, sunt in culpa qui officia
+													deserunt mollit anim id est laborum.
+												</p>
+												<p>
+													Lorem ipsum dolor sit amet, consectetur adipisicing
+													elit, sed do eiusmod tempor incididunt ut labore et
+													dolore magna aliqua. Ut enim ad minim veniam, quis
+													nostrud exercitation ullamco laboris nisi ut aliquip
+													ex ea commodo consequat. Duis aute irure dolor in
+													reprehenderit in voluptate velit esse cillum dolore eu
+													fugiat nulla pariatur. Excepteur sint occaecat
+													cupidatat non proident, sunt in culpa qui officia
+													deserunt mollit anim id est laborum.
+												</p>
+											</div>
+											<div class="modal-footer">
+												<button
+													type="button"
+													class="btn btn-secondary"
+													data-dismiss="modal"
+												>
+													Close
+												</button>
+												<button type="button" class="btn btn-primary">
+													Save changes
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
 						</div>
 					</div>
 					<!-- Simple Datatable start -->
@@ -614,74 +689,48 @@
 									<tr>
 										<th class="table-plus datatable-nosort">ID Mapel</th>
 										<th>Nama Mapel</th>
-										<th>Nama Guru</th>
-										<th>Kelas</th>
 										<th class="datatable-nosort">Action</th>
 									</tr>
 								</thead>
 								<tbody>
+									<?php 
+
+										while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+
+									echo "
 									<tr>
-										<td class="table-plus">MP001</td>
-										<td>Bahasa Arab</td>
-										<td>Moh. Sulaiman S.Pd</td>
-										<td>8</td>
+										<td class='table-plus'>MP".$row['id_pelajaran']."</td>
+										<td>".$row['nama_pelajaran']."</td>
 										<td>
-											<div class="dropdown">
+											<div class='dropdown'>
 												<a
-													class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-													href="#"
-													role="button"
-													data-toggle="dropdown"
+													class='btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle'
+													href='#'
+													role='button'
+													data-toggle='dropdown'
 												>
-													<i class="dw dw-more"></i>
+													<i class='dw dw-more'></i>
 												</a>
 												<div
-													class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
+													class='dropdown-menu dropdown-menu-right dropdown-menu-icon-list'
 												>
-													<a class="dropdown-item" href="#"
-														><i class="dw dw-eye"></i> View</a
+													<a class='dropdown-item' href='#'
+														><i class='dw dw-eye'></i> View</a
 													>
-													<a class="dropdown-item" href="#"
-														><i class="dw dw-edit2"></i> Edit</a
+													<a class='dropdown-item' href='#'
+														><i class='dw dw-edit2'></i> Edit</a
 													>
-													<a class="dropdown-item" href="#"
-														><i class="dw dw-delete-3"></i> Delete</a
+													<a class='dropdown-item' href='#'
+														><i class='dw dw-delete-3'></i> Delete</a
 													>
 												</div>
 											</div>
 										</td>
-									</tr>
-									<tr>
-										<td class="table-plus">MP002</td>
-										<td>Bahasa Indonesia</td>
-										<td>Rosinta Puspitasari S.Pd</td>
-										<td>9a</td>
-										<td>
-											<div class="dropdown">
-												<a
-													class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-													href="#"
-													role="button"
-													data-toggle="dropdown"
-												>
-													<i class="dw dw-more"></i>
-												</a>
-												<div
-													class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
-												>
-													<a class="dropdown-item" href="#"
-														><i class="dw dw-eye"></i> View</a
-													>
-													<a class="dropdown-item" href="#"
-														><i class="dw dw-edit2"></i> Edit</a
-													>
-													<a class="dropdown-item" href="#"
-														><i class="dw dw-delete-3"></i> Delete</a
-													>
-												</div>
-											</div>
-										</td>
-									</tr>
+									</tr>";
+									}
+								
+									?>
+									
 							</table>
 						</div>
 					</div>
