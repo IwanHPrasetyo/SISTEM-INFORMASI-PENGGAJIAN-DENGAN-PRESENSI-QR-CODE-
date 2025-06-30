@@ -498,8 +498,8 @@
 							</a>
 							<ul class="submenu">
 								
-								<li><a href="data_pelajaran.html">Data Pelajaran</a></li>
-								<li><a href="data_jadwal_pelajaran.html">Data Jadwal Pelajaran</a></li>
+								<li><a href="data_pelajaran.php">Data Pelajaran</a></li>
+								<li><a href="data_jadwal_pelajaran.php">Data Jadwal Pelajaran</a></li>
 							</ul>
 						</li>
 							<li class="dropdown">
