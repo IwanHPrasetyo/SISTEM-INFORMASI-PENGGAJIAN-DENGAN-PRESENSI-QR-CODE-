@@ -1,7 +1,22 @@
 <?php 
 	include_once('koneksi.php');
 
-	$result = $db->query("SELECT tj.id_jadwal, tpl.nama_pelajaran, tg.nama, tp.jam_mulai, tp.jam_akhir, tk.nama_kelas, tp.keterangan, tj.QRCode FROM tb_jadwal AS tj JOIN tb_penempatan AS tp ON tj.id_penempatan = tp.id_penempatan JOIN tb_pelajaran AS tpl ON tp.id_pelajaran = tpl.id_pelajaran JOIN tb_guru AS tg ON tp.id_guru = tg.id_guru JOIN tb_kelas AS tk ON tp.id_kelas = tk.id_kelas");
+	$result = $db->query("SELECT tp.id_penempatan,tpl.nama_pelajaran, tg.nama, tp.jam_mulai, tp.jam_akhir, tk.nama_kelas, tp.keterangan, tp.QRCode FROM tb_penempatan AS tp JOIN tb_guru AS tg ON tp.id_guru = tg.id_guru JOIN tb_pelajaran AS tpl ON tp.id_pelajaran = tpl.id_pelajaran JOIN tb_kelas AS tk ON tp.id_kelas = tk.id_kelas");
+
+
+
+	if (isset($_GET['id'])) {
+		$id = $_GET['id'];
+		$sql = 'DELETE FROM tb_penempatan where id_penempatan=:id';
+
+		$query = $db->prepare($sql);
+		$query->execute(array(':id' => $id));
+
+		header("Location:data_jadwal_pelajaran.php");
+		exit;
+	}
+
+
 
 ?>
 
@@ -598,12 +613,117 @@
 									<a
 										class="btn btn-primary"
 										href="#"
+										data-toggle="modal"
+										data-target="#form_input"
 										role="button"
 										data-toggle="dropdown"
 									>
 										Tambah Jadwal Pelajaran
 									</a>
 							</div>
+							
+							<!-- Modal Input Mata Pelajaran -->
+								<div
+									class="modal fade bs-example-modal-lg"
+									id="form_input"
+									tabindex="-1"
+									role="dialog"
+									aria-labelledby="myLargeModalLabel"
+									aria-hidden="true"
+								>
+									<div class="modal-dialog modal-lg modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title" id="myLargeModalLabel">
+													Form Input Jadwal Pelajaran
+												</h4>
+												<button
+													type="button"
+													class="close"
+													data-dismiss="modal"
+													aria-hidden="true"
+												>
+													×
+												</button>
+											</div>
+											<div class="modal-body">
+												<form action="#" method="POST">
+													<div class="form-group">
+														<label>Nama Pelajaran</label>
+														<select
+															class="selectpicker form-control"
+															data-size="5"
+														>
+																<option>Akidah Akhlak</option>
+																<option>Bahasa Indonesia</option>
+																<option>Matematika</option>
+														</select>
+													</div>
+													<div class="form-group">
+														<label>Nama Guru</label>
+														<select
+															class="selectpicker form-control"
+															data-size="5"
+														>
+																<option>Mahfudz, S. Ag.</option>
+																<option>Achmad Hassan S. Pd</option>
+														</select>
+													</div>
+													<div class="form-group">
+														<label>Jam Mengajar</label>
+														<input
+															class="form-control time-picker-default"
+															placeholder="time"
+															type="text"
+														/>
+													</div>
+													<div class="form-group">
+														<label>Jam Selesai</label>
+														<input
+															class="form-control time-picker-default"
+															placeholder="time"
+															type="text"
+														/>
+													</div>
+													<div class="form-group">
+														<label>Kelas</label>
+														<select
+															class="selectpicker form-control"
+															data-size="5"
+														>
+																<option>7</option>
+																<option>8</option>
+																<option>9</option>
+														</select>
+													</div>
+													<div class="form-group">
+														<label>Keterangan</label>
+														<select
+															class="selectpicker form-control"
+															data-size="5"
+														>
+																<option>Hadir</option>
+																<option>Mengajar</option>
+														</select>
+													</div>
+											</div>
+											<div class="modal-footer">
+												<button
+													type="button"
+													class="btn btn-secondary"
+													data-dismiss="modal"
+												>
+													Close
+												</button>
+												<button name="simpan" type="submit" class="btn btn-primary">
+													Save changes
+												</button>
+											</div>
+											</form>
+										</div>
+									</div>
+								</div>
+
 						</div>
 					</div>
 					<!-- Simple Datatable start -->
@@ -635,7 +755,7 @@
 								while($row = $result->fetch(PDO::FETCH_ASSOC)) {
 									echo "
 									<tr>
-										<td class='table-plus'>JP".$row['id_jadwal']."</td>
+										<td class='table-plus'>JP".$row['id_penempatan']."</td>
 										<td>".$row['nama_pelajaran']."</td>
 										<td>".$row['nama']."</td>
 										<td>".$row['jam_mulai']."</td>
@@ -669,7 +789,7 @@
 													<a class='dropdown-item' href='#'
 														><i class='dw dw-edit2'></i> Edit</a
 													>
-													<a class='dropdown-item' href='#'
+													<a class='dropdown-item' href='data_jadwal_pelajaran.php?id=".$row['id_penempatan']."'
 														><i class='dw dw-delete-3'></i> Delete</a
 													>
 												</div>
