@@ -1,7 +1,7 @@
 <?php 
 	include_once('koneksi.php');
 
-	$result = $db->query("SELECT tj.id_jadwal, tpl.nama_pelajaran, tg.nama, tj.hari_waktu, tk.nama_kelas, tp.keterangan, tj.QRCode FROM tb_jadwal AS tj JOIN tb_penempatan AS tp ON tj.id_penempatan = tp.id_penempatan JOIN tb_pelajaran AS tpl ON tp.id_pelajaran = tpl.id_pelajaran JOIN tb_guru AS tg ON tp.id_guru = tg.id_guru JOIN tb_kelas AS tk ON tp.id_kelas = tk.id_kelas");
+	$result = $db->query("SELECT tj.id_jadwal, tpl.nama_pelajaran, tg.nama, tp.jam_mulai, tp.jam_akhir, tk.nama_kelas, tp.keterangan, tj.QRCode FROM tb_jadwal AS tj JOIN tb_penempatan AS tp ON tj.id_penempatan = tp.id_penempatan JOIN tb_pelajaran AS tpl ON tp.id_pelajaran = tpl.id_pelajaran JOIN tb_guru AS tg ON tp.id_guru = tg.id_guru JOIN tb_kelas AS tk ON tp.id_kelas = tk.id_kelas");
 
 ?>
 
@@ -621,7 +621,8 @@
 										<th class="table-plus datatable-nosort">ID Mapel</th>
 										<th>Nama Mapel</th>
 										<th>Nama Guru</th>
-										<th>Hari/Jam Mengajar</th>
+										<th>Jam Mengajar</th>
+										<th>Jam Selesai</th>
 										<th>Kelas</th>
 										<th>Keterangan</th>
 										<th>QR Code</th>
@@ -637,7 +638,8 @@
 										<td class='table-plus'>JP".$row['id_jadwal']."</td>
 										<td>".$row['nama_pelajaran']."</td>
 										<td>".$row['nama']."</td>
-										<td>".$row['hari_waktu']."</td>
+										<td>".$row['jam_mulai']."</td>
+										<td>".$row['jam_akhir']."</td>
 										<td>".$row['nama_kelas']."</td>
 										<td>".$row['keterangan']."</td>
 										<td>

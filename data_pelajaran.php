@@ -3,7 +3,6 @@
 
 	$result = $db->query("SELECT * FROM tb_pelajaran");
 
-
 	// Proses Simpan Data
 	if(isset($_POST['simpan'])){
 		$name = filter_input(INPUT_POST, 'nama_pelajaran', FILTER_SANITIZE_STRING); 
@@ -33,6 +32,21 @@
 		$query->execute(array(':id' => $id));
 
 		header("Location:data_pelajaran.php");
+		exit;
+	}
+
+	// Proses Update Data
+	if (isset($_GET['id_pelajaran'])) {
+		// $id = $_GET['id_pelajaran'];
+		// $nama = $_GET['nama_pelajaran'];
+		// $sql = 'UPDATE FROM tb_pelajaran where id_pelajaran=:id';
+		// $sql = '';
+
+		// $query = $db->prepare($sql);
+		// $query->execute(array(':id' => $id));
+
+		// header("Location:data_pelajaran.php");
+		
 		exit;
 	}
 
@@ -642,7 +656,6 @@
 									</a>
 							</div>
 							<!-- Modal Input Mata Pelajaran -->
-							<div class="pd-20 card-box height-100-p">
 								<div
 									class="modal fade bs-example-modal-lg"
 									id="form_input"
@@ -695,78 +708,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
-
-							<!-- Modal Edit Mata Pelajaran -->
-							<div class="pd-20 card-box height-100-p">
-								<div
-									class="modal fade bs-example-modal-lg"
-									id="form_edit"
-									tabindex="-1"
-									role="dialog"
-									aria-labelledby="myLargeModalLabel"
-									aria-hidden="true"
-								>
-									<div class="modal-dialog modal-lg modal-dialog-centered">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h4 class="modal-title" id="myLargeModalLabel">
-													Form Edit Mata Pelajaran
-												</h4>
-												<button
-													type="button"
-													class="close"
-													data-dismiss="modal"
-													aria-hidden="true"
-												>
-													×
-												</button>
-											</div>
-											<div class="modal-body">
-												<form action="#" method="POST">
-													
-													<div class="form-group">
-														<label>ID Pelajaran</label>
-														<input
-															class="form-control"
-															type="hidden"
-															placeholder="ID Pelajaran"
-															name="edit_id_pelajaran"
-															id="modal-id"
-														/>
-													</div>
-
-													<div class="form-group">
-														<label>Nama Pelajaran</label>
-														<input
-															class="form-control"
-															type="text"
-															placeholder="Nama Pelajaran"
-															name="edit_nama_pelajaran"
-															id="modal-nama"
-														/>
-													</div>
-												
-											</div>
-											<div class="modal-footer">
-												<button
-													type="button"
-													class="btn btn-secondary"
-													data-dismiss="modal"
-												>
-													Close
-												</button>
-												<button name="simpan" type="submit" class="btn btn-primary">
-													Save changes
-												</button>
-											</div>
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>
-
-
+								
 						</div>
 					</div>
 					<!-- Simple Datatable start -->
@@ -811,9 +753,9 @@
 													<a class='dropdown-item' href='#'
 														><i class='dw dw-eye'></i> View</a
 													>
-													<a   data-id='{$row['id_pelajaran']}'
-                   										 data-nama='{$row['nama_pelajaran']}' 
-														class='dropdown-item'data-toggle='modal' data-target='#form_edit'
+													<a  data-id='{$row['id_pelajaran']}'
+                   										data-nama='{$row['nama_pelajaran']}' 
+														class='dropdown-item'data-toggle='modal' data-target='#form_edit{$row['id_pelajaran']}'
 														><i class='dw dw-edit2'></i> Edit</a
 													>
 													<a class='dropdown-item' href='data_pelajaran.php?id=".$row['id_pelajaran']."'
@@ -822,7 +764,84 @@
 												</div>
 											</div>
 										</td>
-									</tr>";
+									</tr>
+									
+									<!-- Modal Edit Mata Pelajaran -->
+										<div
+											class='modal fade bs-example-modal-lg'
+											id='form_edit{$row['id_pelajaran']}'
+											tabindex='-1'
+											role='dialog'
+											aria-labelledby='myLargeModalLabel'
+											aria-hidden='true'
+										>
+											<div class='modal-dialog modal-lg modal-dialog-centered'>
+												<div class='modal-content'>
+													<div class='modal-header'>
+														<h4 class='modal-title' id='myLargeModalLabel'>
+															Form Edit Mata Pelajaran
+														</h4>
+														<button
+															type='button'
+															class='close'
+															data-dismiss='modal'
+															aria-hidden='true'
+															onclick='closeModal(\"".$row['id_pelajaran']."\", \"".$row['nama_pelajaran']."\")'
+														>
+															×
+														</button>
+													</div>
+													<div class='modal-body'>
+														<form action='data_pelajaran.php?id_pelajaran=".$row['id_pelajaran']."&nama_pelajaran=".$row['nama_pelajaran']."' method='POST'>
+															
+															<div class='form-group'>
+																<label>ID Pelajaran</label>
+																<input
+																	class='form-control'
+																	placeholder='ID Pelajaran'
+																	name='edit_id_pelajaran{$row['id_pelajaran']}'
+																	id='edit_id_pelajaran{$row['id_pelajaran']}'
+																	value=MP".$row['id_pelajaran']."
+																	disabled
+
+																/>
+															</div>
+
+															<div class='form-group'>
+																<label>Nama Pelajaran</label>
+																<input
+																	class='form-control'
+																	type='text'
+																	placeholder='Nama Pelajaran'
+																	name='edit_nama_pelajaran{$row['id_pelajaran']}'
+																	id='edit_nama_pelajaran{$row['id_pelajaran']}'
+																	value='{$row['nama_pelajaran']}'
+																/>
+															</div>
+														
+													</div>
+													<div class='modal-footer'>
+														<button
+															type='button'
+															class='btn btn-secondary'
+															data-dismiss='modal'
+															onclick='closeModal(\"".$row['id_pelajaran']."\", \"".$row['nama_pelajaran']."\")'
+														>
+															Close
+														</button>
+														<button 
+															name='edit' 
+															type='submit'
+															class='btn btn-primary'>
+															Save changes
+														</button>
+													</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									
+									";
 									}
 								
 									?>
@@ -839,15 +858,23 @@
 		<!-- js -->
 
 		<script>
-		// Isi modal saat akan ditampilkan
-		 $(document).on('click', '.btn-edit', function () {
-			var id = $(this).data('id');
-			var nama = $(this).data('nama');
-			
-			$('#modal-id').val(id);
-			$('#modal-nama').val(nama);
-		});
 		
+									
+			// fungsi close modal
+			function closeModal(id,nama) {
+				// Sembunyikan modal
+				$('#form_edit'+id).hide();
+				$('#edit_nama_pelajaran'+id).val(nama) 
+				console.log('jalan modal')
+			}
+
+			// fungsi edit data
+
+			function editData(id,nama){
+				console.log('edit data')
+				// console.log($('#edit_nama_pelajaran'+id).val())
+			}
+
 		</script>
 
 
