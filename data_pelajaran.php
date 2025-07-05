@@ -36,17 +36,22 @@
 	}
 
 	// Proses Update Data
-	if (isset($_GET['id_pelajaran'])) {
-		// $id = $_GET['id_pelajaran'];
-		// $nama = $_GET['nama_pelajaran'];
-		// $sql = 'UPDATE FROM tb_pelajaran where id_pelajaran=:id';
-		// $sql = '';
+	if (isset($_GET['edit_id_pelajaran'])) {
 
-		// $query = $db->prepare($sql);
-		// $query->execute(array(':id' => $id));
-
-		// header("Location:data_pelajaran.php");
+		$id = $_GET['edit_id_pelajaran'];
+		$nama = $_GET['edit_nama_pelajaran'];
 		
+		$sql = 'UPDATE tb_pelajaran SET nama_pelajaran=:nama WHERE id_pelajaran=:id';
+
+		$query = $db->prepare($sql);
+		$query->execute(array(':id' => $id,':nama' => $nama));
+
+		header("Location:data_pelajaran.php");
+		
+		// echo "<script>console.log('$id');</script>";
+		// echo "<script>console.log('$nama');</script>";
+
+
 		exit;
 	}
 
@@ -792,17 +797,17 @@
 														</button>
 													</div>
 													<div class='modal-body'>
-														<form action='data_pelajaran.php?id_pelajaran=".$row['id_pelajaran']."&nama_pelajaran=".$row['nama_pelajaran']."' method='POST'>
+														<form action='data_pelajaran.php?id_pelajaran=".$row['id_pelajaran']."&nama_pelajaran=".$row['nama_pelajaran']."' method='GET'>
 															
 															<div class='form-group'>
 																<label>ID Pelajaran</label>
 																<input
 																	class='form-control'
 																	placeholder='ID Pelajaran'
-																	name='edit_id_pelajaran{$row['id_pelajaran']}'
-																	id='edit_id_pelajaran{$row['id_pelajaran']}'
-																	value=MP".$row['id_pelajaran']."
-																	disabled
+																	name='edit_id_pelajaran'
+																	id='edit_id_pelajaran'
+																	value=".$row['id_pelajaran']."
+																	type='hidden'
 
 																/>
 															</div>
@@ -813,8 +818,8 @@
 																	class='form-control'
 																	type='text'
 																	placeholder='Nama Pelajaran'
-																	name='edit_nama_pelajaran{$row['id_pelajaran']}'
-																	id='edit_nama_pelajaran{$row['id_pelajaran']}'
+																	name='edit_nama_pelajaran'
+																	id='edit_nama_pelajaran'
 																	value='{$row['nama_pelajaran']}'
 																/>
 															</div>
@@ -830,7 +835,6 @@
 															Close
 														</button>
 														<button 
-															name='edit' 
 															type='submit'
 															class='btn btn-primary'>
 															Save changes
