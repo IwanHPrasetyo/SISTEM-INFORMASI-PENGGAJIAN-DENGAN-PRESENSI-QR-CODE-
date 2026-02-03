@@ -50,7 +50,7 @@
 		"gulp-csso": "^4.0.1",
 		"gulp-install": "^1.1.0",
 		"install": "^0.12.1",
-		"npm": "^6.14.11",
+		"npm": "^11.8.0",
 		"node-sass": "^5.0.0",
 		"onscreen": "^1.1.3"
 	}
